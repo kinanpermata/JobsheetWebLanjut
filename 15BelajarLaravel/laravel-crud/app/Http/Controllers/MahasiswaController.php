@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         // Mengambil data dari tabel mahasiswa
