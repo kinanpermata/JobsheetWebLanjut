@@ -29,14 +29,21 @@ class MahasiswaController extends Controller
 
     public function simpan(Request $request)
     {
+        $this->validate($request, [
+            'nama' => 'required',
+            'nim' => 'required|numeric',
+            'email' => 'required|email',
+            'jurusan' => 'required'
+        ]);
+
         // Insert data ke tabel mahasiswa
         DB::table('mahasiswa')->insert([
-            'nama' => $request->namamhs,
-            'nim' => $request->nimmhs,
-            'email' => $request->emailmhs,
-            'jurusan' => $request->jurusanmhs,
+            'nama' => $request->nama,
+            'nim' => $request->nim,
+            'email' => $request->email,
+            'jurusan' => $request->jurusan,
         ]);
-        return redirect('/');
+        return view('simpan', ['data' => $request]);
     }
 
     public function detail($id)
@@ -73,7 +80,7 @@ class MahasiswaController extends Controller
     {
         // Menghapus data mahasiswa bedasarkan id yang dipilih
         $mahasiswa = DB::table('mahasiswa')->where('id', $id)->delete();
-        
+
         return redirect('/');
     }
 }

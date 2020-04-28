@@ -2,32 +2,46 @@
 <!-- Isi title -->
 @section('title', 'Tambah Data')
 
-<!-- Isi bagian judul halaman-->
+<!-- Isi bagian judul halaman -->
 @section('judul_halaman', 'Tambah Data Mahasiswa')
 
-<!-- Isi bagian konten-->
+<!-- Isi bagian konten -->
 @section('konten')
-    <a href="/" class="btn btn-danger">Kembali</a>
+    <a href="/mahasiswa" class="btn btn-danger">Kembali</a>
     <br/>
     <br/>
+    <!-- Menampilkan error validasi -->
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $errors)
+                <li>{{ $errors }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    <!-- Form validasi -->
     <form action="/mahasiswa/simpan" method="post">
         {{ csrf_field() }}
+
         <div class="form-group">
-            <label for="namamhs">Nama</label>
-            <input type="text" class="form-control" required="reqiured" name="namamhs"> <br/>
+            <label for="nama">Nama</label>
+            <input class="form-control" type="text" name="nama" value="{{ old('nama') }}"> <br/>
         </div>
         <div class="form-group">
-            <label for="nimmhs">NIM</label>
-            <input type="number" class="form-control" required="reqiured" name="nimmhs"> <br/>
+            <label for="nim">NIM</label>
+            <input class="form-control" type="text" name="nim" value="{{ old('nim') }}"> <br/>
         </div>
         <div class="form-group">
-            <label for="emailmhs">E-mail</label>
-            <input type="email" class="form-control" required="required" name="emailmhs"> <br/>
+            <label for="email">E-mail</label>
+            <input class="form-control" type="text" name="email" value="{{ old('email') }}"> <br/>
         </div>
         <div class="form-group">
-            <label for="jurusanmhs">Jurusan</label>
-            <input type="text" class="form-control" required="reqiured" name="jurusanmhs"> <br/>
+            <label for="jurusan">Jurusan</label>
+            <input class="form-control" type="text" name="jurusan" value="{{ old('jurusan') }}"> <br/>
         </div>
-        <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Data</button>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Tambah">
+        </div>
     </form>
 @endsection
